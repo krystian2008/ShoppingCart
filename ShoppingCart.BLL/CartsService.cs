@@ -33,49 +33,38 @@ namespace ShoppingCart.BLL
         public ResultWrapper<CartItemModel> AddToCart(string cartname, int productId, int quantity)
         {
             var result = new ResultWrapper<CartItemModel>();
-
             var cart = StoreDBSingleton.Instance.CartItems.FirstOrDefault(x => string.Compare(x.CartName, cartname, true) == 0);
-            var product = StoreDBSingleton.Instance.ProductItems.FirstOrDefault(x => x.Id == productId);
 
             if (cart == null)
             {
-                result.ErrorCode = 404;
-                result.ErrorMessage = "shopping cart does not exist";
+                result.SetErrorMessage("shopping cart does not exist", 404);
 
                 return result;
             }
-            
+
+            var product = StoreDBSingleton.Instance.ProductItems.FirstOrDefault(x => x.Id == productId);
             if (product == null)
             {
-                result.ErrorCode = 404;
-                result.ErrorMessage = "product does not exist";
+                result.SetErrorMessage("product does not exist", 404);
 
                 return result;
             }
 
-            if (cart != null && product != null)
+            if (product.Stock < quantity)
             {
-                //enought quantity
-                if (product.Stock >= quantity)
-                {
-                    //check if product has already exists in cart
-                    int index = cart.Items.FindIndex(x => x.ProductId == productId);
-                    if (index >= 0)
-                    {
-                        cart.Items[index].Quantity += quantity;
-                    }
-                    else
-                    {
-                        cart.Items.Add(new CartItemModel(product.Id, product.Name, product.Price, quantity));
-                    }                    
-                }
-                else
-                {
-                    result.ErrorCode = 400;
-                    result.ErrorMessage = "not enough quantity";
+                result.SetErrorMessage("not enough quantity", 400);
 
-                    return result;
-                }
+                return result;
+            }
+
+            int index = cart.Items.FindIndex(x => x.ProductId == productId);
+            if (index >= 0)
+            {
+                cart.Items[index].Quantity += quantity;
+            }
+            else
+            {
+                cart.Items.Add(new CartItemModel(product.Id, product.Name, product.Price, quantity));
             }
 
             return result;
@@ -93,18 +82,15 @@ namespace ShoppingCart.BLL
 
         public ResultWrapper<CartItemModel> GetCartsItems(string cartname)
         {
-            var cart = StoreDBSingleton.Instance.CartItems.FirstOrDefault(x => string.Compare(x.CartName, cartname, true) == 0);
             var result = new ResultWrapper<CartItemModel>();
+            var cart = StoreDBSingleton.Instance.CartItems.FirstOrDefault(x => string.Compare(x.CartName, cartname, true) == 0);
 
-            if (cart != null)
+            if (cart == null)
             {
-                result.Items = cart.Items;
+                result.SetErrorMessage("cart does not exist", 404);
             }
-            else
-            {
-                result.ErrorCode = 404;
-                result.ErrorMessage = "cart does not exist";
-            }
+
+            result.Items = cart.Items;
 
             return result;
         }

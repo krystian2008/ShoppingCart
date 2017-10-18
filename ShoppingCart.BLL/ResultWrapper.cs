@@ -11,8 +11,14 @@ namespace ShoppingCart.BLL
             Items = new List<T>();
         }
 
-        public int ErrorCode { get; set; }
-        public string ErrorMessage { get; set; }
+        public int ErrorCode { get; private set; }
+        public string ErrorMessage { get; private set; }
         public List<T> Items { get; set; }
+
+        public void SetErrorMessage(string message, int code = 0)
+        {
+            ErrorMessage = message;
+            ErrorCode = code;
+        }
     }
 }
