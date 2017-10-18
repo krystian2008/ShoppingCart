@@ -72,7 +72,34 @@ namespace ShoppingCart.BLL
 
         public ResultWrapper<CartItemModel> CheckoutCart(string cartname)
         {
-            throw new NotImplementedException();
+            var result = new ResultWrapper<CartItemModel>();
+            var cart = StoreDBSingleton.Instance.CartItems.FirstOrDefault(x => string.Compare(x.CartName, cartname, true) == 0);
+            var prodExists = StoreDBSingleton.Instance.ProductItems.Any();
+
+            if (cart == null || !prodExists)
+            {
+                result.SetErrorMessage("shopping cart does not exist or products in the shopping cart do not exist", 404);
+
+                return result;
+            }
+
+            foreach (var item in cart.Items)
+            {
+                var product = StoreDBSingleton.Instance.ProductItems.FirstOrDefault(x => x.Id == item.ProductId);
+
+                if (product == null || (product != null && product.Stock < item.Quantity))
+                {
+                    result.SetErrorMessage("not enough quantity, other stock related issues", 400);
+
+                    return result;
+                }
+
+                product.Stock -= item.Quantity;
+            }
+
+            result.SetErrorMessage("successfully checked out shopping cart");
+
+            return result;
         }
 
         public void Delete(CartItemModel entity)

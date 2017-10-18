@@ -42,20 +42,13 @@ namespace ShoppingCart.Web.Controllers
             return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
         }
 
-        // POST: api/ShoppingBasket
-        public void Post([FromBody]string value)
+        [HttpGet]
+        [Route("api/ShoppingBasket/{cartname}/Checkout")]
+        public IHttpActionResult Post(string cartname)
         {
-        }
+            var result = _service.CheckoutCart(cartname);
 
-        // PUT: api/ShoppingBasket/5
-        public void Put(int id, [FromBody]string value)
-        {
-            
-        }
-
-        // DELETE: api/ShoppingBasket/5
-        public void Delete(int id)
-        {
+            return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
         }
     }
 }
