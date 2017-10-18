@@ -13,28 +13,19 @@ namespace ShoppingCart.BLL
 
         private static StoreDBSingleton instance = null;
 
-        public static StoreDBSingleton Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new StoreDBSingleton();
-                }
-                return instance;
-            }
-        }
+        public static StoreDBSingleton Instance => instance ?? (instance = new StoreDBSingleton());
 
         public List<ProductItemModel> ProductItems
         {
             get
             {
-                var result = new List<ProductItemModel>();
-
-                result.Add(new ProductItemModel(1001, "Nintendo Switch", "Game Console", 279.99, 10));
-                result.Add(new ProductItemModel(1002, "Legend Of Zelda", "Video Game", 49.99, 20));
-                result.Add(new ProductItemModel(1003, "IPhone 7", "Mobile Phone", 799.99, 1));
-                result.Add(new ProductItemModel(1004, "Geforce GTX", "GPU Card", 210.99, 5));
+                var result = new List<ProductItemModel>
+                {
+                    new ProductItemModel(1001, "Nintendo Switch", "Game Console", 279.99, 10),
+                    new ProductItemModel(1002, "Legend Of Zelda", "Video Game", 49.99, 20),
+                    new ProductItemModel(1003, "IPhone 7", "Mobile Phone", 799.99, 1),
+                    new ProductItemModel(1004, "Geforce GTX", "GPU Card", 210.99, 5),
+                };
 
                 return result;
             }

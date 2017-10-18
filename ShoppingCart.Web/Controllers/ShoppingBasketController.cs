@@ -12,18 +12,18 @@ namespace ShoppingCart.Web.Controllers
 {
     public class ShoppingBasketController : ApiController
     {
-        private ICartsService service;
+        private readonly ICartsService _service;
 
         public ShoppingBasketController()
         {
-            service = new CartsService();
+            _service = new CartsService();
         }
 
         [HttpGet]
         [Route("api/ShoppingBasket/{cartname}")]
         public IHttpActionResult Get(string cartname)
         {
-            var result = service.GetCartsItems(cartname);
+            var result = _service.GetCartsItems(cartname);
 
             if (result != null && result.Items != null && result.Items.Count > 0)
             {
@@ -37,19 +37,9 @@ namespace ShoppingCart.Web.Controllers
         [Route("api/ShoppingBasket/{cartname}")]
         public IHttpActionResult Put(string cartname, [FromBody]Parameters parameters)
         {
-            var result = service.AddToCart(cartname, parameters.ProductId, parameters.Quantity);
+            var result = _service.AddToCart(cartname, parameters.ProductId, parameters.Quantity);
 
-            switch (result.ErrorCode)
-            {
-                case 400:
-                    return BadRequest(result.ErrorMessage);
-                case 404:
-                    return NotFound();
-                default:
-                    break;
-            }
-
-            return Ok(result.ErrorMessage);
+            return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
         }
 
         // POST: api/ShoppingBasket

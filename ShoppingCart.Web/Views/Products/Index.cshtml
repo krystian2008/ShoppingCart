@@ -27,6 +27,8 @@
 
 @Html.MVCGrid("ProductsMVCGrid")
 
+@section scripts
+{
 <script>
      $(function () {
          $('#btnApply').click(function () {
@@ -43,3 +45,4 @@
          });
      });
 </script>
+}

@@ -7,12 +7,6 @@ namespace ShoppingCart.BLL.Models
 {
     public class ProductItemModel : IProductItem
     {
-        private int id;
-        private string name;
-        private string description;
-        private double price;
-        private int stock;
-
         public ProductItemModel(int id, string name, string description, double price, int stock)
         {
             this.Id = id;
@@ -22,10 +16,10 @@ namespace ShoppingCart.BLL.Models
             this.Stock = stock;
         }
 
-        public int Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public string Description { get => description; set => description = value; }
-        public double Price { get => price; set => price = value; }
-        public int Stock { get => stock; set => stock = value; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        public int Stock { get; set; }
     }
 }

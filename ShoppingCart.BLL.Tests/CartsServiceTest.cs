@@ -11,18 +11,18 @@ namespace ShoppingCart.BLL.Tests
         private const int PRODUCT_ID_EXISTS = 1001;
         private const int PRODUCT_ID_NOT_EXISTS = 1011;
 
-        private ICartsService service;
+        private ICartsService _service;
 
         [TestInitialize]
         public void Initialize()
         {
-            service = new CartsService();
+            _service = new CartsService();
         }
 
         [TestMethod]
         public void GetCartsItemsExists()
         {
-            var result = service.GetCartsItems(CART_NAME_EXISTS);
+            var result = _service.GetCartsItems(CART_NAME_EXISTS);
 
             Assert.IsTrue(result.Items.Count > 0);
         }
@@ -30,7 +30,7 @@ namespace ShoppingCart.BLL.Tests
         [TestMethod]
         public void GetCartsItemsNotExists()
         {
-            var result = service.GetCartsItems(CART_NAME_NOT_EXISTS);
+            var result = _service.GetCartsItems(CART_NAME_NOT_EXISTS);
 
             Assert.IsTrue(result.Items.Count == 0);
         }
@@ -38,7 +38,7 @@ namespace ShoppingCart.BLL.Tests
         [TestMethod]
         public void AddToExistingCart()
         {
-            var result = service.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, 2);
+            var result = _service.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, 2);
 
             Assert.IsTrue(result.ErrorCode == 0);
         }        

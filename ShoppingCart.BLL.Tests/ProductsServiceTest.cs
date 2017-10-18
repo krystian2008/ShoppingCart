@@ -6,18 +6,18 @@ namespace ShoppingCart.BLL.Tests
     [TestClass]
     public class ProductsServiceTest
     {
-        private IProductService service;
+        private IProductService _service;
 
         [TestInitialize]
         public void Initialize()
         {
-            service = new ProductsService();
+            _service = new ProductsService();
         }
 
         [TestMethod]
         public void GetProducts()
         {
-            var result = service.GetProducts();
+            var result = _service.GetProducts();
 
             Assert.IsTrue(result.ErrorCode == 0);
         }
