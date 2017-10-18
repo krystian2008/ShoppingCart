@@ -83,10 +83,7 @@ namespace ShoppingCart.BLL
 
         public ResultWrapper<CartItemModel> CheckoutCart(string cartname)
         {
-            //TODO: zdjąć z produktów ilość przy checkout;
-            //product.Stock -= quantity;
-
-            return null;
+            throw new NotImplementedException();
         }
 
         public void Delete(CartItemModel entity)
