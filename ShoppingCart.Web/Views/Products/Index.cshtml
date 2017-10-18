@@ -1,0 +1,45 @@
+﻿<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+@model ShoppingCart.BLL.Models.ProductItemModel
+@using MVCGrid.Web
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Products</h2>
+
+<div class="well">
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Name"
+                   data-mvcgrid-type="filter" data-mvcgrid-option="name" id="filterName"/>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Description"
+                   data-mvcgrid-type="filter" data-mvcgrid-option="description" id="filterDesc"/>
+        </div>
+        <button id="btnApply" type="button" class="btn btn-primary">Apply</button>
+        <button id="btnClear" type="button" class="btn btn-default">Clear</button>
+    </div>
+</div>
+
+@Html.MVCGrid("ProductsMVCGrid")
+
+<script>
+     $(function () {
+         $('#btnApply').click(function () {
+             MVCGrid.setAdditionalQueryOptions('ProductsMVCGrid',
+             {
+                 filterName: $('#filterName').val(),
+                 filterDesc: $('#filterDesc').val(),
+             });
+         });
+
+         $('#btnClear').click(function () {
+             $('#filterName').val('');
+             $('#filterDesc').val('');
+         });
+     });
+</script>
