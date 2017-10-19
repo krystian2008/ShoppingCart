@@ -1,4 +1,5 @@
-﻿using ShoppingCart.BLL;
+﻿using log4net;
+using ShoppingCart.BLL;
 using ShoppingCart.BLL.Interfaces;
 using ShoppingCart.BLL.Models;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Web.Http;
 
 namespace ShoppingCart.Web.Controllers
@@ -15,7 +17,8 @@ namespace ShoppingCart.Web.Controllers
     /// </summary>
     public class ShoppingBasketController : ApiController
     {
-        private readonly ICartsService _service = null;
+        private readonly ICartsService _service;
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// CTOR
@@ -34,14 +37,24 @@ namespace ShoppingCart.Web.Controllers
         [Route("api/ShoppingBasket/{cartname}")]
         public IHttpActionResult Get(string cartname)
         {
-            var result = _service.GetCartsItems(cartname);
-
-            if (result != null && result.Items != null && result.Items.Count > 0)
+            try
             {
-                return Ok(result.Items);
-            }
+                var result = _service.GetCartsItems(cartname);
 
-            return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+                if (result != null && result.Items != null && result.Items.Count > 0)
+                {
+                    return Ok(result.Items);
+                }
+
+                return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                var msg = string.Format("Exception - GetCartsItems, parameters: cartname='{0}'", cartname);
+                log.Error(msg, ex);
+
+                return BadRequest();
+            }
         }
 
         /// <summary>
@@ -54,9 +67,19 @@ namespace ShoppingCart.Web.Controllers
         [Route("api/ShoppingBasket/{cartname}")]
         public IHttpActionResult Put(string cartname, [FromBody]ProductInfo parameters)
         {
-            var result = _service.AddToCart(cartname, parameters.ProductId, parameters.Quantity);
+            try
+            {
+                var result = _service.AddToCart(cartname, parameters.ProductId, parameters.Quantity);
 
-            return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+                return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                var msg = string.Format("Exception - AddToCart, parameters: cartname='{0}', ProductId='{1}', Quantity='{2}'", cartname, parameters.ProductId, parameters.Quantity);
+                log.Error(msg, ex);
+
+                return BadRequest();
+            }
         }
 
         /// <summary>
@@ -68,9 +91,19 @@ namespace ShoppingCart.Web.Controllers
         [Route("api/ShoppingBasket/{cartname}/Checkout")]
         public IHttpActionResult Post(string cartname)
         {
-            var result = _service.CheckoutCart(cartname);
+            try
+            {
+                var result = _service.CheckoutCart(cartname);
 
-            return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+                return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                var msg = string.Format("Exception - CheckoutCart, parameters: cartname='{0}'", cartname);
+                log.Error(msg, ex);
+
+                return BadRequest();
+            }
         }
     }
 }

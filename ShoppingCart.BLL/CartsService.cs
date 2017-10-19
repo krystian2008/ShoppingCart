@@ -1,18 +1,18 @@
 ﻿using ShoppingCart.BLL.Interfaces;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 using ShoppingCart.BLL.Models;
-using ShoppingCart.DAL.Interfaces;
 using ShoppingCart.DAL;
+using ShoppingCart.DAL.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace ShoppingCart.BLL
 {
     public class CartsService : ServiceBase<ICartsService>, ICartsService
     {
-        private ICartsRepository _cartsRepository;
-        private IProductsRepository _productsRepository;
+        private readonly ICartsRepository _cartsRepository;
+        private readonly IProductsRepository _productsRepository;
 
         public CartsService()
            : this(new CartsRepository(), new ProductsRepository())
@@ -94,7 +94,7 @@ namespace ShoppingCart.BLL
                     result.SetErrorMessage("not enough quantity, other stock related issues", 400);
 
                     return result;
-                }                
+                }
 
                 product.Stock -= item.Quantity;
             }

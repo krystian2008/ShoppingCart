@@ -11,7 +11,7 @@ namespace ShoppingCart.BLL
 {
     public class ProductsService : ServiceBase<IProductsService>, IProductsService
     {
-        private IProductsRepository _productsRepository;
+        private readonly IProductsRepository _productsRepository;
 
         public ProductsService()
             :this (new ProductsRepository())
