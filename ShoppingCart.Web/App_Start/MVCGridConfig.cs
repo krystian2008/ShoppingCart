@@ -59,7 +59,7 @@ namespace ShoppingCart.Web
                 .WithAdditionalQueryOptionNames("filterName", "filterDesc")
                 .WithRetrieveDataMethod((context) =>
                 {
-                    var service = new ProductsService();
+                    var service = DependencyResolver.Current.GetService<IProductsService>();
                     var result = service.GetProducts();
                     var options = context.QueryOptions;
                     var query = result.Items.AsQueryable();
