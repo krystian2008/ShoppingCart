@@ -15,14 +15,14 @@ namespace ShoppingCart.Web.Controllers
     /// </summary>
     public class ShoppingBasketController : ApiController
     {
-        private readonly ICartsService _service;
+        private readonly ICartsService _service = null;
 
         /// <summary>
-        /// Shopping Basket CTOR
+        /// CTOR
         /// </summary>
-        public ShoppingBasketController()
+        public ShoppingBasketController(ICartsService service)
         {
-            _service = new CartsService();
+            _service = service;
         }
 
         /// <summary>

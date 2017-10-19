@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingCart.BLL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,17 @@ namespace ShoppingCart.Web.Controllers
     /// </summary>
     public class ProductsController : Controller
     {
+        private readonly IProductsService _service = null;
+
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="service"></param>
+        public ProductsController(IProductsService service)
+        {
+            _service = service;
+        }
+
         /// <summary>
         /// List of products
         /// </summary>

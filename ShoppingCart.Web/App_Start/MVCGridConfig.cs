@@ -12,6 +12,7 @@ namespace ShoppingCart.Web
     using MVCGrid.Web;
     using ShoppingCart.BLL.Models;
     using ShoppingCart.BLL;
+    using ShoppingCart.BLL.Interfaces;
 
     public static class MVCGridConfig 
     {
