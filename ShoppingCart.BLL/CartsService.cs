@@ -50,7 +50,7 @@ namespace ShoppingCart.BLL
                 return result;
             }
 
-            if (product.Stock < quantity)
+            if (product.Stock < quantity || quantity == 0)
             {
                 result.SetErrorMessage("not enough quantity", 400);
 
@@ -66,6 +66,8 @@ namespace ShoppingCart.BLL
             {
                 cart.Items.Add(new CartItemModel(product.Id, product.Name, product.Price, quantity));
             }
+
+            result.SetErrorMessage("product successfully added");
 
             return result;
         }
@@ -92,7 +94,7 @@ namespace ShoppingCart.BLL
                     result.SetErrorMessage("not enough quantity, other stock related issues", 400);
 
                     return result;
-                }
+                }                
 
                 product.Stock -= item.Quantity;
             }
@@ -115,6 +117,7 @@ namespace ShoppingCart.BLL
             if (cart == null)
             {
                 result.SetErrorMessage("cart does not exist", 404);
+                return result;
             }
 
             result.Items = cart.Items;

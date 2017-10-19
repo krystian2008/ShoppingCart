@@ -6,11 +6,17 @@ using System.Web;
 namespace ShoppingCart.Web
 {
     /// <summary>
-    /// Class Parameters
+    /// Class Parameters to use in Shopping Basket Controller
     /// </summary>
-    public class Parameters
+    public class ProductInfo
     {
+        /// <summary>
+        /// Product Id
+        /// </summary>
         public int ProductId { get; set; }
+        /// <summary>
+        /// Quantity of product
+        /// </summary>
         public int Quantity { get; set; }
     }
 }

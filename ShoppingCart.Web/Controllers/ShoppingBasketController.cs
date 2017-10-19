@@ -10,15 +10,26 @@ using System.Web.Http;
 
 namespace ShoppingCart.Web.Controllers
 {
+    /// <summary>
+    /// Shopping Basket Api Controller
+    /// </summary>
     public class ShoppingBasketController : ApiController
     {
         private readonly ICartsService _service;
 
+        /// <summary>
+        /// Shopping Basket CTOR
+        /// </summary>
         public ShoppingBasketController()
         {
             _service = new CartsService();
         }
 
+        /// <summary>
+        /// Get the shopping cart details
+        /// </summary>
+        /// <param name="cartname"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/ShoppingBasket/{cartname}")]
         public IHttpActionResult Get(string cartname)
@@ -30,18 +41,29 @@ namespace ShoppingCart.Web.Controllers
                 return Ok(result.Items);
             }
 
-            return NotFound();
+            return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
         }
 
+        /// <summary>
+        /// Add a product to the shopping cart
+        /// </summary>
+        /// <param name="cartname"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("api/ShoppingBasket/{cartname}")]
-        public IHttpActionResult Put(string cartname, [FromBody]Parameters parameters)
+        public IHttpActionResult Put(string cartname, [FromBody]ProductInfo parameters)
         {
             var result = _service.AddToCart(cartname, parameters.ProductId, parameters.Quantity);
 
             return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
         }
 
+        /// <summary>
+        /// Checkout shopping cart
+        /// </summary>
+        /// <param name="cartname"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/ShoppingBasket/{cartname}/Checkout")]
         public IHttpActionResult Post(string cartname)

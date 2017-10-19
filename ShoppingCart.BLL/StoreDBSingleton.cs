@@ -9,46 +9,53 @@ namespace ShoppingCart.BLL
     {
         private StoreDBSingleton()
         {
+            initProducts();
+            initCart();
         }
 
         private static StoreDBSingleton instance = null;
 
         public static StoreDBSingleton Instance => instance ?? (instance = new StoreDBSingleton());
 
+        private List<ProductItemModel> _productItems = new List<ProductItemModel>();
+
         public List<ProductItemModel> ProductItems
         {
             get
             {
-                var result = new List<ProductItemModel>
-                {
-                    new ProductItemModel(1001, "Nintendo Switch", "Game Console", 279.99, 10),
-                    new ProductItemModel(1002, "Legend Of Zelda", "Video Game", 49.99, 20),
-                    new ProductItemModel(1003, "IPhone 7", "Mobile Phone", 799.99, 1),
-                    new ProductItemModel(1004, "Geforce GTX", "GPU Card", 210.99, 5),
-                };
-
-                return result;
+                return _productItems;
             }
         }
 
-        private List<CartItemsModel> cartItems = new List<CartItemsModel>();
+        private List<CartItemsModel> _cartItems = new List<CartItemsModel>();
 
         public List<CartItemsModel> CartItems
         {
             get
             {
-                var cart = new CartItemsModel("cartname_exists");
-                cart.Items.Add(new CartItemModel(1001, "Nintendo Switch", 279.99, 1));
-                cart.Items.Add(new CartItemModel(1004, "Geforce GTX", 210.99, 2));
-
-                cartItems.Add(cart);
-
-                return cartItems;
+                return _cartItems;
             }
             private set
             {
-                cartItems = value;
+                _cartItems = value;
             }
+        }
+
+        private void initProducts()
+        {
+            _productItems.Add(new ProductItemModel(1001, "Nintendo Switch", "Game Console", 279.99, 10));
+            _productItems.Add(new ProductItemModel(1002, "Legend Of Zelda", "Video Game", 49.99, 20));
+            _productItems.Add(new ProductItemModel(1003, "IPhone 7", "Mobile Phone", 799.99, 1));
+            _productItems.Add(new ProductItemModel(1004, "Geforce GTX", "GPU Card", 210.99, 5));
+        }
+
+        private void initCart()
+        {
+            var cart = new CartItemsModel("cartname_exists");
+            cart.Items.Add(new CartItemModel(1001, "Nintendo Switch", 279.99, 1));
+            cart.Items.Add(new CartItemModel(1004, "Geforce GTX", 210.99, 2));
+
+            _cartItems.Add(cart);
         }
     }
 }

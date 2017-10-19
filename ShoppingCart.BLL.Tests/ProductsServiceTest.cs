@@ -6,7 +6,7 @@ namespace ShoppingCart.BLL.Tests
     [TestClass]
     public class ProductsServiceTest
     {
-        private IProductService _service;
+        private IProductsService _service;
 
         [TestInitialize]
         public void Initialize()
@@ -19,7 +19,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _service.GetProducts();
 
-            Assert.IsTrue(result.ErrorCode == 0);
+            Assert.IsTrue(result.ErrorCode == 200);
         }
 
         [TestCleanup]

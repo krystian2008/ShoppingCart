@@ -5,10 +5,11 @@ using ShoppingCart.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ShoppingCart.BLL
 {
-    public class ProductsService : ServiceBase<IProductService>, IProductService
+    public class ProductsService : ServiceBase<IProductsService>, IProductsService
     {
         private IProductsRepository _productsRepository;
 
@@ -42,12 +43,17 @@ namespace ShoppingCart.BLL
             throw new NotImplementedException();
         }
 
-        public ResultWrapper<ProductItemModel> GetProducts()
+        /// <summary>
+        /// Get all Products by id
+        /// </summary>
+        /// <param name="id">id = 0 - get all elements</param>
+        /// <returns></returns>
+        public ResultWrapper<ProductItemModel> GetProducts(int id = 0)
         {
             //TODO: get data from _productsRepository not from StoreDBSingleton
 
             var result = new ResultWrapper<ProductItemModel>();
-            result.Items = StoreDBSingleton.Instance.ProductItems;
+            result.Items = (id == 0) ? StoreDBSingleton.Instance.ProductItems : StoreDBSingleton.Instance.ProductItems.FindAll(x => x.Id == id);
 
             return result;
         }

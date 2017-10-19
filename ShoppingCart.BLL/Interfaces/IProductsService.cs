@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ShoppingCart.BLL.Interfaces
 {
-    public interface IProductService : IService<ProductItemModel>
+    public interface IProductsService : IService<ProductItemModel>
     {
-        ResultWrapper<ProductItemModel> GetProducts();
+        ResultWrapper<ProductItemModel> GetProducts(int id = 0);
     }
 }
