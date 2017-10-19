@@ -12,7 +12,7 @@ namespace ShoppingCart.Web.Controllers
     /// </summary>
     public class ProductsController : Controller
     {
-        private readonly IProductsService _service = null;
+        private readonly IProductsService _service;
 
         /// <summary>
         /// CTOR
