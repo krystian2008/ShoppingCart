@@ -17,7 +17,7 @@ Used components:
 - log4net
 - Ninject
 - Swagger
-- MVCGrid (http://mvcgrid.net/) - control to view products
+- MVCGrid
 
 TODO:
 - add database project to solution (tables, views, relations,...)
