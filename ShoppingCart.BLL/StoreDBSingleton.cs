@@ -51,7 +51,7 @@ namespace ShoppingCart.BLL
 
         private void initCart()
         {
-            var cart = new CartItemsModel("cartname_exists");
+            var cart = new CartItemsModel("cartname_01");
             cart.Items.Add(new CartItemModel(1001, "Nintendo Switch", 279.99, 1));
             cart.Items.Add(new CartItemModel(1004, "Geforce GTX", 210.99, 2));
 

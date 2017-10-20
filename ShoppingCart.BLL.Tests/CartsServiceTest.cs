@@ -7,10 +7,12 @@ namespace ShoppingCart.BLL.Tests
     [TestClass]
     public class CartsServiceTest
     {
-        private const string CART_NAME_EXISTS = "cartname_exists";
-        private const string CART_NAME_NOT_EXISTS = "cartname_not_exists";
+        private const string CART_NAME_EXISTS = "cartname_01";
+        private const string CART_NAME_NOT_EXISTS = "cartname_02";
         private const int PRODUCT_ID_EXISTS = 1001;
         private const int PRODUCT_ID_NOT_EXISTS = 1011;
+        private const int PRODUCT_QUANTITY = 1;
+        private const int ERROR_CODE_OK = 200;
 
         private ICartsService _cartService;
         private IProductsService _prodService;
@@ -23,27 +25,75 @@ namespace ShoppingCart.BLL.Tests
         }
 
         [TestMethod]
-        public void GetCartsItemsExists()
+        public void GetCart_WithExistingName()
         {
             var result = _cartService.GetCartsItems(CART_NAME_EXISTS);
 
-            Assert.IsTrue(result.Items.Count > 0);
+            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
         }
 
         [TestMethod]
-        public void GetCartsItemsNotExists()
+        public void GetCart_WithNotExistingName()
         {
             var result = _cartService.GetCartsItems(CART_NAME_NOT_EXISTS);
 
-            Assert.IsTrue(result.Items.Count == 0);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
         }
 
         [TestMethod]
-        public void AddToExistingCart()
+        public void AddExistingProduct_ToExistingCart()
         {
-            var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, 2);
+            var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, PRODUCT_QUANTITY);
 
-            Assert.IsTrue(result.ErrorCode == 200);
+            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void AddExistingProduct_ToNotExistingCart()
+        {
+            var result = _cartService.AddToCart(CART_NAME_NOT_EXISTS, PRODUCT_ID_EXISTS, PRODUCT_QUANTITY);
+
+            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void AddNotExistingProduct_ToExistingCart()
+        {
+            var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_NOT_EXISTS, PRODUCT_QUANTITY);
+
+            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void AddNotExistingProduct_ToNotExistingCart()
+        {
+            var result = _cartService.AddToCart(CART_NAME_NOT_EXISTS, PRODUCT_ID_NOT_EXISTS, PRODUCT_QUANTITY);
+
+            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void AddExistingProduct_ToExistingCart_NotEnoughQuantity()
+        {
+            var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, 1000);
+
+            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void AddExistingProduct_ToExistingCart_QuantityZero()
+        {
+            var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, 0);
+
+            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void AddExistingProduct_ToExistingCart_QuantityNegative()
+        {
+            var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, -1000);
+
+            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
         }
 
         [TestMethod]
@@ -51,11 +101,28 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.CheckoutCart(CART_NAME_EXISTS);
 
-            Assert.IsTrue(result.ErrorCode == 200);
+            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
         }
 
         [TestMethod]
-        public void CheckoutCart_DecraseStockProduct_True()
+        public void CheckoutNotExistingCart()
+        {
+            var result = _cartService.CheckoutCart(CART_NAME_NOT_EXISTS);
+
+            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void GetCart_WithAddedNewExistingProduct()
+        {
+            var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, PRODUCT_QUANTITY);
+            var cart = _cartService.GetCartsItems(CART_NAME_EXISTS);
+
+            Assert.IsNotNull(cart.Items.FirstOrDefault(x => x.ProductId == PRODUCT_ID_EXISTS));
+        }
+
+        [TestMethod]
+        public void CheckoutExistingCart_DecraseStockProduct()
         {            
             var cart = _cartService.GetCartsItems(CART_NAME_EXISTS);
             var firstItem = cart.Items.FirstOrDefault();
@@ -75,7 +142,6 @@ namespace ShoppingCart.BLL.Tests
         [TestCleanup]
         public void CleanupRessources()
         {
-            //TODO:
         }
     }
 }

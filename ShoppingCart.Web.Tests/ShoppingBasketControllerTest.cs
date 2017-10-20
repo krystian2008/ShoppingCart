@@ -7,7 +7,7 @@ namespace ShoppingCart.Web.Tests
     [TestClass]
     public class ShoppingBasketControllerTest
     {
-        private const string CART_NAME_EXISTS = "cartname_exists";
+        private const string CART_NAME_EXISTS = "cartname_01";
 
         [TestMethod]
         public void GetCart()

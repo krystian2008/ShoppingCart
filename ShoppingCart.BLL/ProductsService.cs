@@ -50,10 +50,13 @@ namespace ShoppingCart.BLL
         /// <returns></returns>
         public ResultWrapper<ProductItemModel> GetProducts(int id = 0)
         {
-            //TODO: get data from _productsRepository not from StoreDBSingleton
+            //TODO: get data from _productsRepository
 
             var result = new ResultWrapper<ProductItemModel>();
-            result.Items = (id == 0) ? StoreDBSingleton.Instance.ProductItems : StoreDBSingleton.Instance.ProductItems.FindAll(x => x.Id == id);
+            result.Items = (id == 0) ? StoreDBSingleton.Instance.ProductItems 
+                                     : StoreDBSingleton.Instance.ProductItems.FindAll(x => x.Id == id);
+
+            result.SetErrorMessage(string.Empty, result.Items.Count > 0 ? 200 : 0);
 
             return result;
         }

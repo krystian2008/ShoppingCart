@@ -41,5 +41,14 @@ namespace ShoppingCart.Web.Controllers
         {
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// Redirect to Swagger
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RedirectToSwagger()
+        {
+            return Redirect("/swagger");
+        }
     }
 }
