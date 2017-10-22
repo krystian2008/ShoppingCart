@@ -18,7 +18,7 @@ namespace ShoppingCart.BLL
     /// </summary>
     public class ProductsService : IProductsService
     {
-        private IRepository<Product> _repoProd;
+        private readonly IRepository<Product> _repoProd;
 
         public ProductsService()
         {

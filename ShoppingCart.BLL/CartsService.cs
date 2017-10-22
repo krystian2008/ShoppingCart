@@ -14,8 +14,8 @@ namespace ShoppingCart.BLL
     /// </summary>
     public class CartsService : ICartsService
     {
-        private IRepository<Product> _repoProd;
-        private IRepository<DAL.EntityModels.ShoppingCart> _repoCart;
+        private readonly IRepository<Product> _repoProd;
+        private readonly IRepository<DAL.EntityModels.ShoppingCart> _repoCart;
 
         public CartsService()
         {
