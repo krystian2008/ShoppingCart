@@ -121,9 +121,9 @@
       <DependentUpon>ShoppingCartModel.edmx</DependentUpon>
       <LastGenOutput>ShoppingCartModel.cs</LastGenOutput>
     </Content>
-    <Content Include="ShoppingCartDB.mdf">
+    <EmbeddedResource Include="ShoppingCartDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Content Include="ShoppingCartDB_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>ShoppingCartDB.mdf</DependentUpon>
