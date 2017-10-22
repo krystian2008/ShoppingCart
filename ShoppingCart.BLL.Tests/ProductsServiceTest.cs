@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingCart.BLL.Interfaces;
+using ShoppingCart.BLL.Models;
 using System.Linq;
 
 namespace ShoppingCart.BLL.Tests
@@ -20,43 +21,49 @@ namespace ShoppingCart.BLL.Tests
         }
 
         [TestMethod]
-        public void ThereAreExacly4Product()
+        public void GetProducts_InitialStoreState_ExaclyFourProductExpected()//ok
         {
             var result = _service.GetProducts();
             var expected = 4;
 
+            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode);
+            Assert.IsNotNull(result.Items);
             Assert.AreEqual(expected, result.Items.Count);
         }
 
         [TestMethod]
-        public void GetProducts_AreAllAvailable()
+        public void GetProducts_InitialStoreState_AllProductsAreInStock()//ok
         {
             var result = _service.GetProducts();
-
+            AssertBasicResult(result);
             Assert.IsTrue(result.Items.All(x => x.Stock > 0));
         }
 
-        [TestMethod]
-        public void GetProduct_WithExistingId()
+        private static void AssertBasicResult(ResultWrapper<ProductItemModel> result, int code = 0 )//do modyfikacji
         {
-            var expected = PRODUCT_ID_EXISTS;
-            var result = _service.GetProducts(expected);
-
             Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode);
+            Assert.IsNotNull(result.Items);
         }
 
         [TestMethod]
-        public void GetProduct_WithNotExistingId()
+        public void GetProduct_ByExistingId_ProductExpected()//ok
+        {
+            var result = _service.GetProducts(PRODUCT_ID_EXISTS);
+            
+            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode);
+            Assert.IsNotNull(result.Items);
+            Assert.IsTrue(result.Items.Count == 1, "Collection must contain exacly one item");
+            Assert.AreEqual(PRODUCT_ID_EXISTS, result.Items[0].Id);
+        }
+
+        [TestMethod]
+        public void GetProduct_ByNotExistingId_NoneProductExpected()
         {
             var result = _service.GetProducts(PRODUCT_ID_NOT_EXISTS);
 
             Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode);
-        }
-
-        [TestCleanup]
-        public void CleanupRessources()
-        {
-
+            Assert.IsNotNull(result.Items);
+            Assert.IsTrue(result.Items.Count == 0, "Collection must be empty");
         }
     }
 }

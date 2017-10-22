@@ -12,11 +12,10 @@ namespace ShoppingCart.BLL.Models
 
         public CartItemsModel(string cartname)
         {
-            this.CartName = cartname;
-            this.Items = new List<CartItemModel>();
+            this.CartName = cartname;;
         }
 
-        public List<CartItemModel> Items { get; set; }
+        public List<CartItemModel> Items { get; set; } = new List<CartItemModel>();
 
         public double TotalPrice
         {

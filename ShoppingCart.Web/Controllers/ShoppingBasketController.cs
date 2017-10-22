@@ -53,7 +53,7 @@ namespace ShoppingCart.Web.Controllers
                 var msg = string.Format("Exception - GetCartsItems, parameters: cartname='{0}'", cartname);
                 log.Error(msg, ex);
 
-                return BadRequest();
+                return InternalServerError();
             }
         }
 
@@ -78,7 +78,7 @@ namespace ShoppingCart.Web.Controllers
                 var msg = string.Format("Exception - AddToCart, parameters: cartname='{0}', ProductId='{1}', Quantity='{2}'", cartname, parameters.ProductId, parameters.Quantity);
                 log.Error(msg, ex);
 
-                return BadRequest();
+                return InternalServerError();
             }
         }
 
@@ -102,7 +102,7 @@ namespace ShoppingCart.Web.Controllers
                 var msg = string.Format("Exception - CheckoutCart, parameters: cartname='{0}'", cartname);
                 log.Error(msg, ex);
 
-                return BadRequest();
+                return InternalServerError();
             }
         }
     }

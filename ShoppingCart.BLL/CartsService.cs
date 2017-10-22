@@ -32,8 +32,6 @@ namespace ShoppingCart.BLL
 
         public ResultWrapper<CartItemModel> AddToCart(string cartname, int productId, int quantity)
         {
-            //TODO: get data from _cartsRepository, _productsRepository
-
             var result = new ResultWrapper<CartItemModel>();
             var cart = StoreDBSingleton.Instance.CartItems.FirstOrDefault(x => string.Compare(x.CartName, cartname, true) == 0);
 
@@ -76,8 +74,6 @@ namespace ShoppingCart.BLL
 
         public ResultWrapper<CartItemModel> CheckoutCart(string cartname)
         {
-            //TODO: get data from _cartsRepository, _productsRepository
-
             var result = new ResultWrapper<CartItemModel>();
             var cart = StoreDBSingleton.Instance.CartItems.FirstOrDefault(x => string.Compare(x.CartName, cartname, true) == 0);
             var prodExists = StoreDBSingleton.Instance.ProductItems.Any();
@@ -115,8 +111,6 @@ namespace ShoppingCart.BLL
 
         public ResultWrapper<CartItemModel> GetCartsItems(string cartname)
         {
-            //TODO: get data from _cartsRepository, _productsRepository
-
             var result = new ResultWrapper<CartItemModel>();
             var cart = StoreDBSingleton.Instance.CartItems.FirstOrDefault(x => string.Compare(x.CartName, cartname, true) == 0);
 

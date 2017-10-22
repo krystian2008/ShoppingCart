@@ -25,7 +25,7 @@ namespace ShoppingCart.BLL.Tests
         }
 
         [TestMethod]
-        public void GetCart_WithExistingName()
+        public void GetCart_WithExistingName_StatusCode200()
         {
             var result = _cartService.GetCartsItems(CART_NAME_EXISTS);
 
@@ -57,10 +57,11 @@ namespace ShoppingCart.BLL.Tests
         }
 
         [TestMethod]
-        public void AddNotExistingProduct_ToExistingCart()
+        public void AddToCart_NotExistingProduct_ToExistingCart_ExpectedCode404_ShoppingCartDoesNotExistMessageExpected() //   AddNotExistingProduct_ToExistingCart()
         {
             var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_NOT_EXISTS, PRODUCT_QUANTITY);
 
+            //TODO: add ERROR_CODE for each returned code 404,...
             Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
         }
 

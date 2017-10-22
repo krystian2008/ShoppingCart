@@ -24,3 +24,6 @@ TODO:
 - use ORM - EntityFramework (ex. database first to create objects to use in ShoppingCart.DAL to store data and also fill model objects in ShoppingCart.BLL)
 - implement get data to services from ShoppingCart.DAL (also mapping data from db to proper models)
 - implement CRUD operations and missing business logic using proper repositories for products, carts,... .
+- opisać przyszłe wykorzystanie repositorium
+
+coś jeszcze od siebie dodać w temacie co do zrobienia
