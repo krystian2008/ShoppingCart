@@ -26,7 +26,7 @@ namespace ShoppingCart.BLL.Tests
             var result = _service.GetProducts();
             var expected = 4;
 
-            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode);
+            Assert.AreEqual(ERROR_CODE_OK, result.Code);
             Assert.IsNotNull(result.Items);
             Assert.AreEqual(expected, result.Items.Count);
         }
@@ -41,7 +41,7 @@ namespace ShoppingCart.BLL.Tests
 
         private static void AssertBasicResult(ResultWrapper<ProductItemModel> result, int code = 0 )//do modyfikacji
         {
-            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode);
+            Assert.AreEqual(ERROR_CODE_OK, result.Code);
             Assert.IsNotNull(result.Items);
         }
 
@@ -50,7 +50,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _service.GetProducts(PRODUCT_ID_EXISTS);
             
-            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode);
+            Assert.AreEqual(ERROR_CODE_OK, result.Code);
             Assert.IsNotNull(result.Items);
             Assert.IsTrue(result.Items.Count == 1, "Collection must contain exacly one item");
             Assert.AreEqual(PRODUCT_ID_EXISTS, result.Items[0].Id);
@@ -61,7 +61,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _service.GetProducts(PRODUCT_ID_NOT_EXISTS);
 
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code);
             Assert.IsNotNull(result.Items);
             Assert.IsTrue(result.Items.Count == 0, "Collection must be empty");
         }

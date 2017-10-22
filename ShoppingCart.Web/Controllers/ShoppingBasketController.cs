@@ -46,7 +46,7 @@ namespace ShoppingCart.Web.Controllers
                     return Ok(result.Items);
                 }
 
-                return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+                return Content((HttpStatusCode)result.Code, result.Message);
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@ namespace ShoppingCart.Web.Controllers
             {
                 var result = _service.AddToCart(cartname, parameters.ProductId, parameters.Quantity);
 
-                return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+                return Content((HttpStatusCode)result.Code, result.Message);
             }
             catch (Exception ex)
             {
@@ -95,7 +95,7 @@ namespace ShoppingCart.Web.Controllers
             {
                 var result = _service.CheckoutCart(cartname);
 
-                return Content((HttpStatusCode)result.ErrorCode, result.ErrorMessage);
+                return Content((HttpStatusCode)result.Code, result.Message);
             }
             catch (Exception ex)
             {

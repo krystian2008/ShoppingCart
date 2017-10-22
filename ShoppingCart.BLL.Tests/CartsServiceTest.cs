@@ -8,7 +8,7 @@ namespace ShoppingCart.BLL.Tests
     public class CartsServiceTest
     {
         private const string CART_NAME_EXISTS = "cartname_01";
-        private const string CART_NAME_NOT_EXISTS = "cartname_02";
+        private const string CART_NAME_NOT_EXISTS = "cartname_03";
         private const int PRODUCT_ID_EXISTS = 1001;
         private const int PRODUCT_ID_NOT_EXISTS = 1011;
         private const int PRODUCT_QUANTITY = 1;
@@ -29,7 +29,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.GetCartsItems(CART_NAME_EXISTS);
 
-            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.GetCartsItems(CART_NAME_NOT_EXISTS);
 
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, PRODUCT_QUANTITY);
 
-            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.AddToCart(CART_NAME_NOT_EXISTS, PRODUCT_ID_EXISTS, PRODUCT_QUANTITY);
 
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace ShoppingCart.BLL.Tests
             var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_NOT_EXISTS, PRODUCT_QUANTITY);
 
             //TODO: add ERROR_CODE for each returned code 404,...
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.AddToCart(CART_NAME_NOT_EXISTS, PRODUCT_ID_NOT_EXISTS, PRODUCT_QUANTITY);
 
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, 1000);
 
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, 0);
 
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.AddToCart(CART_NAME_EXISTS, PRODUCT_ID_EXISTS, -1000);
 
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -102,7 +102,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.CheckoutCart(CART_NAME_EXISTS);
 
-            Assert.AreEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace ShoppingCart.BLL.Tests
         {
             var result = _cartService.CheckoutCart(CART_NAME_NOT_EXISTS);
 
-            Assert.AreNotEqual(ERROR_CODE_OK, result.ErrorCode, result.ErrorMessage);
+            Assert.AreNotEqual(ERROR_CODE_OK, result.Code, result.Message);
         }
 
         [TestMethod]

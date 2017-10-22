@@ -176,6 +176,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Parameters\ProductInfo.cs" />
+    <Compile Include="Grids\MVCGridProductsConfig.cs" />
+    <Compile Include="Models\MVCGridToolbarModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +187,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\Shared\_MVCGridToolbar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -192,12 +195,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ShoppingCart.BLL\ShoppingCart.BLL.csproj">
-      <Project>{2e692c81-0d1c-4084-bb2f-bda01e93945e}</Project>
+      <Project>{926c15aa-b236-4a39-be1d-b70674af2dde}</Project>
       <Name>ShoppingCart.BLL</Name>
     </ProjectReference>
   </ItemGroup>
