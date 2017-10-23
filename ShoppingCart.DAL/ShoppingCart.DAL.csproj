@@ -92,6 +92,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ShoppingCartModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ConfigManager.cs" />
     <Compile Include="Infrastructure\Context.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Interfaces\IContext.cs" />
