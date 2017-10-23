@@ -35,7 +35,7 @@ namespace ShoppingCart.BLL
 
             if (cart == null)
             {
-                result.SetResultMessage("shopping cart does not exist", 404);
+                result.SetResult("shopping cart does not exist", 404);
 
                 return result;
             }
@@ -43,14 +43,14 @@ namespace ShoppingCart.BLL
             var product = _repoProd.GetAll().FirstOrDefault(x => x.Id == productId);
             if (product == null)
             {
-                result.SetResultMessage("product does not exist", 404);
+                result.SetResult("product does not exist", 404);
 
                 return result;
             }
 
             if (product.Stock < quantity || quantity <= 0)
             {
-                result.SetResultMessage("not enough quantity", 400);
+                result.SetResult("not enough quantity", 400);
 
                 return result;
             }
@@ -73,7 +73,7 @@ namespace ShoppingCart.BLL
 
             _repoCart.SaveChanges();
 
-            result.SetResultMessage("product successfully added");
+            result.SetResult("product successfully added");
 
             return result;
         }
@@ -86,7 +86,7 @@ namespace ShoppingCart.BLL
 
             if (cart == null || !prodExists)
             {
-                result.SetResultMessage("shopping cart does not exist or products in the shopping cart do not exist", 404);
+                result.SetResult("shopping cart does not exist or products in the shopping cart do not exist", 404);
 
                 return result;
             }
@@ -97,7 +97,7 @@ namespace ShoppingCart.BLL
 
                 if (product == null || (product != null && product.Stock < item.Quantity))
                 {
-                    result.SetResultMessage("not enough quantity, other stock related issues", 400);
+                    result.SetResult("not enough quantity, other stock related issues", 400);
 
                     return result;
                 }
@@ -108,7 +108,7 @@ namespace ShoppingCart.BLL
 
             _repoProd.SaveChanges();
 
-            result.SetResultMessage("successfully checked out shopping cart");
+            result.SetResult("successfully checked out shopping cart");
 
             return result;
         }
@@ -120,7 +120,7 @@ namespace ShoppingCart.BLL
 
             if (cart == null)
             {
-                result.SetResultMessage("cart does not exist", 404);
+                result.SetResult("cart does not exist", 404);
                 return result;
             }
 

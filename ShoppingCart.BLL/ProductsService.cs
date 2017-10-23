@@ -32,7 +32,7 @@ namespace ShoppingCart.BLL
             var products = (id == 0) ? _repoProd.GetAll() : _repoProd.GetAll().Where(x => x.Id == id);
             products.ToList().ForEach(x => result.Items.Add(ObjectMapper.SimpleMap<Product, ProductItemModel>(x)));
 
-            result.SetResultMessage(string.Empty, result.Items.Count > 0 ? 200 : 0);
+            result.SetResult(string.Empty, result.Items.Count > 0 ? 200 : 0);
 
             return result;
         }
