@@ -10,7 +10,7 @@ using System.Linq;
 namespace ShoppingCart.BLL
 {
     /// <summary>
-    /// Service class for Carts
+    /// Service class for Carts <see cref="CartItemModel"/>
     /// </summary>
     public class CartsService : ICartsService
     {

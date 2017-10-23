@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.DAL.Infrastructure
 {
+    /// <summary>
+    /// Class for storing DbContext
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Context<T> : IContext<T> where T : class
     {
         private const string CONNECTION_STRING_NAME = "ShoppingCartDBEntities";

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.DAL.Interfaces
 {
+    /// <summary>
+    /// Interface for repostory classes
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IRepository<T>
     {
         T Add(T entity);

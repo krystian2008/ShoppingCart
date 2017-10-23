@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.DAL
 {
+    /// <summary>
+    /// Repostory class with DbContext
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly IContext<T> _context;

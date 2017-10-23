@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.BLL.Models
 {
+    /// <summary>
+    /// Model class for shopping cart items
+    /// </summary>
     public class CartItemModel
     {
         public CartItemModel()

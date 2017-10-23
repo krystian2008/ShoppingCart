@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.BLL.Models
 {
+    /// <summary>
+    /// Model class for Product
+    /// </summary>
     public class ProductItemModel
-    {
+    {        
         public ProductItemModel(int id, string name, string description, double price, int stock)
         {
             this.Id = id;

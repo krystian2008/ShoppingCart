@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.DAL.Interfaces
 {
+    /// <summary>
+    /// Interface for DbContext class
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IContext<T> : IDisposable where T : class
     {
         DbContext DbCtx { get; }

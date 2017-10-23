@@ -1,14 +1,18 @@
 ﻿using ShoppingCart.BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ShoppingCart.DAL.EntityModels;
 
 namespace ShoppingCart.BLL.Interfaces
 {
+    /// <summary>
+    /// Interface for classes resposible for operations on products <see cref="Product"/>
+    /// </summary>
     public interface IProductsService
     {
+        /// <summary>
+        /// Get all products or by id (0 = means return all)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         ResultWrapper<ProductItemModel> GetProducts(int id = 0);
     }
 }

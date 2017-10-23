@@ -14,7 +14,7 @@ using ShoppingCart.BLL.Mappings;
 namespace ShoppingCart.BLL
 {
     /// <summary>
-    /// Service class for Products
+    /// Service class for Products <see cref="ProductItemModel"/>
     /// </summary>
     public class ProductsService : IProductsService
     {
