@@ -23,7 +23,7 @@ namespace ShoppingCart.BLL
             Items = new List<T>();
         }
 
-        public void SetErrorMessage(string message, int code = 200)
+        public void SetResultMessage(string message, int code = 200)
         {
             this.Message = message;
             this.Code = code;

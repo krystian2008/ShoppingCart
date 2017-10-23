@@ -35,7 +35,7 @@ namespace ShoppingCart.BLL
 
             if (cart == null)
             {
-                result.SetErrorMessage("shopping cart does not exist", 404);
+                result.SetResultMessage("shopping cart does not exist", 404);
 
                 return result;
             }
@@ -43,14 +43,14 @@ namespace ShoppingCart.BLL
             var product = _repoProd.GetAll().FirstOrDefault(x => x.Id == productId);
             if (product == null)
             {
-                result.SetErrorMessage("product does not exist", 404);
+                result.SetResultMessage("product does not exist", 404);
 
                 return result;
             }
 
             if (product.Stock < quantity || quantity <= 0)
             {
-                result.SetErrorMessage("not enough quantity", 400);
+                result.SetResultMessage("not enough quantity", 400);
 
                 return result;
             }
@@ -73,7 +73,7 @@ namespace ShoppingCart.BLL
 
             _repoCart.SaveChanges();
 
-            result.SetErrorMessage("product successfully added");
+            result.SetResultMessage("product successfully added");
 
             return result;
         }
@@ -86,7 +86,7 @@ namespace ShoppingCart.BLL
 
             if (cart == null || !prodExists)
             {
-                result.SetErrorMessage("shopping cart does not exist or products in the shopping cart do not exist", 404);
+                result.SetResultMessage("shopping cart does not exist or products in the shopping cart do not exist", 404);
 
                 return result;
             }
@@ -97,7 +97,7 @@ namespace ShoppingCart.BLL
 
                 if (product == null || (product != null && product.Stock < item.Quantity))
                 {
-                    result.SetErrorMessage("not enough quantity, other stock related issues", 400);
+                    result.SetResultMessage("not enough quantity, other stock related issues", 400);
 
                     return result;
                 }
@@ -108,7 +108,7 @@ namespace ShoppingCart.BLL
 
             _repoProd.SaveChanges();
 
-            result.SetErrorMessage("successfully checked out shopping cart");
+            result.SetResultMessage("successfully checked out shopping cart");
 
             return result;
         }
@@ -120,7 +120,7 @@ namespace ShoppingCart.BLL
 
             if (cart == null)
             {
-                result.SetErrorMessage("cart does not exist", 404);
+                result.SetResultMessage("cart does not exist", 404);
                 return result;
             }
 
