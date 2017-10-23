@@ -14,23 +14,24 @@ namespace ShoppingCart.BLL.Mappings
     /// </summary>
     public static class ObjectMapper
     {
-        public static D SimpleMap<S, D>(S source) where S : class where D : class
+        public static void ConfigureAutoMapper()
         {
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<S, D>();
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<Product, ProductItemModel>();
+                cfg.CreateMap<CartItem, CartItemModel>().ForMember(d => d.UnitPrice, opt => opt.MapFrom(s => s.Product.Price));
             });
 
-            IMapper iMapper = config.CreateMapper();
-
-            return iMapper.Map<S, D>(source);
+            Mapper.AssertConfigurationIsValid();
         }
 
-        public static CartItemModel MapCart(CartItem source)
+        public static CartItemModel Map(this CartItem source)
         {
-            var dest = ObjectMapper.SimpleMap<CartItem, CartItemModel>(source);
-            dest.UnitPrice = source.Product.Price;
+            return Mapper.Map<CartItemModel>(source);
+        }
 
-            return dest;
+        public static ProductItemModel Map(this Product source)
+        {
+            return Mapper.Map<ProductItemModel>(source);
         }
     }
 }

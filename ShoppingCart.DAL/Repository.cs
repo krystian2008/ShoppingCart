@@ -32,12 +32,7 @@ namespace ShoppingCart.DAL
             return _context.DbSet.Add(entity);
         }
 
-        public int Count()
-        {
-            return _context.DbSet.Count();
-        }
-
-        public T Delete(T entity)
+        public T Remove(T entity)
         {
             return _context.DbSet.Remove(entity);
         }
@@ -47,9 +42,9 @@ namespace ShoppingCart.DAL
             return _context.DbSet;
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            _context.DbCtx.SaveChanges();
+            return _context.DbCtx.SaveChanges();
         }
 
         public T Update(T entity)

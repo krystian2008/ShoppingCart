@@ -12,17 +12,6 @@ namespace ShoppingCart.Web.Controllers
     /// </summary>
     public class ProductsController : Controller
     {
-        private readonly IProductsService _service;
-
-        /// <summary>
-        /// CTOR
-        /// </summary>
-        /// <param name="service"></param>
-        public ProductsController(IProductsService service)
-        {
-            _service = service;
-        }
-
         /// <summary>
         /// List of products
         /// </summary>
@@ -33,22 +22,13 @@ namespace ShoppingCart.Web.Controllers
         }
 
         /// <summary>
-        /// Add product to cart
+        /// Add product to cart (future use)
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
         public ActionResult AddToCart(int productId)
         {
             return RedirectToAction("Index");
-        }
-
-        /// <summary>
-        /// Redirect to Swagger
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult RedirectToSwagger()
-        {
-            return Redirect("/swagger");
         }
     }
 }

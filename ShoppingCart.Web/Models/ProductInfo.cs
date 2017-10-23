@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ShoppingCart.Web
+namespace ShoppingCart.Web.Models
 {
     /// <summary>
     /// Class Parameters to use in Shopping Basket Controller

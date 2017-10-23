@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingCart.BLL.Interfaces;
+using ShoppingCart.BLL.Mappings;
 using ShoppingCart.BLL.Models;
 using System.Linq;
 
@@ -18,6 +19,7 @@ namespace ShoppingCart.BLL.Tests
         public void Initialize()
         {
             _service = new ProductsService();
+            ObjectMapper.ConfigureAutoMapper();
         }
 
         [TestMethod]

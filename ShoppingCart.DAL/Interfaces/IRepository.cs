@@ -13,10 +13,9 @@ namespace ShoppingCart.DAL.Interfaces
     public interface IRepository<T>
     {
         T Add(T entity);
-        T Delete(T entity);
+        T Remove(T entity);
         T Update(T entity);
         IQueryable<T> GetAll();
-        int Count();
-        void SaveChanges();
+        int SaveChanges();
     }
 }

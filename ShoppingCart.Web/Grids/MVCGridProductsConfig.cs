@@ -54,7 +54,7 @@ namespace ShoppingCart.Web.Grids
                     .WithSorting(false)
                     .WithHeaderText(" ")
                     .WithValueExpression((p, c) => c.UrlHelper.Action("AddToCart", "Products", new { productId = p.Id }))
-                    .WithValueTemplate("<a href='{Value}' class='btn btn-primary' role='button'>Add To Cart</a>");
+                    .WithValueTemplate("<a href='{Value}' class='btn btn-primary' role='button' title='future use'>Add To Cart</a>");
                 })
                 .WithSorting(true, "Name", SortDirection.Asc)
                 .WithFiltering(true)

@@ -12,21 +12,14 @@ namespace ShoppingCart.BLL
     /// <typeparam name="T"></typeparam>
     public class ResultWrapper<T> where T : class
     {
-        public int Code { get; private set; }
-        public string Message { get; private set; }
-        public List<T> Items { get; set; }
-
-        public ResultWrapper()
-        {
-            Code = 200;
-            Message = string.Empty;
-            Items = new List<T>();
-        }
+        public int Code { get; private set; } = 200;
+        public string Message { get; private set; } = string.Empty;
+        public IList<T> Items { get; set; } = new List<T>();
 
         public void SetResult(string message, int code = 200)
         {
-            this.Message = message;
-            this.Code = code;
+            Message = message;
+            Code = code;
         }
     }
 }

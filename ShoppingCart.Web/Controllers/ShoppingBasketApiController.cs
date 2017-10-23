@@ -2,6 +2,7 @@
 using ShoppingCart.BLL;
 using ShoppingCart.BLL.Interfaces;
 using ShoppingCart.BLL.Models;
+using ShoppingCart.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ShoppingCart.Web.Controllers
     /// <summary>
     /// Shopping Basket Api Controller
     /// </summary>
-    public class ShoppingBasketController : ApiController
+    public class ShoppingBasketApiController : ApiController
     {
         private readonly ICartsService _service;
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -23,7 +24,7 @@ namespace ShoppingCart.Web.Controllers
         /// <summary>
         /// CTOR
         /// </summary>
-        public ShoppingBasketController(ICartsService service)
+        public ShoppingBasketApiController(ICartsService service)
         {
             _service = service;
         }
@@ -50,10 +51,7 @@ namespace ShoppingCart.Web.Controllers
             }
             catch (Exception ex)
             {
-                var msg = string.Format("Exception - GetCartsItems, parameters: cartname='{0}'", cartname);
-                log.Error(msg, ex);
-
-                return InternalServerError();
+                return HandleException($"Exception - GetCartsItems, parameters: cartname='{cartname}'", ex);
             }
         }
 
@@ -75,10 +73,7 @@ namespace ShoppingCart.Web.Controllers
             }
             catch (Exception ex)
             {
-                var msg = string.Format("Exception - AddToCart, parameters: cartname='{0}', ProductId='{1}', Quantity='{2}'", cartname, parameters.ProductId, parameters.Quantity);
-                log.Error(msg, ex);
-
-                return InternalServerError();
+                return HandleException($"Exception - AddToCart, parameters: cartname='{cartname}', ProductId='{parameters?.ProductId}', Quantity='{parameters?.Quantity}'", ex);
             }
         }
 
@@ -89,7 +84,7 @@ namespace ShoppingCart.Web.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/ShoppingBasket/{cartname}/Checkout")]
-        public IHttpActionResult Post(string cartname)
+        public IHttpActionResult Checkout(string cartname)
         {
             try
             {
@@ -99,11 +94,15 @@ namespace ShoppingCart.Web.Controllers
             }
             catch (Exception ex)
             {
-                var msg = string.Format("Exception - CheckoutCart, parameters: cartname='{0}'", cartname);
-                log.Error(msg, ex);
-
-                return InternalServerError();
+                return HandleException($"Exception - CheckoutCart, parameters: cartname='{cartname}'", ex);
             }
+        }
+
+        private IHttpActionResult HandleException(string msg ,Exception ex)
+        {            
+            log.Error(msg, ex);
+
+            return InternalServerError();
         }
     }
 }

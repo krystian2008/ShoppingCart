@@ -124,7 +124,7 @@ namespace ShoppingCart.BLL
                 return result;
             }
 
-            cart.CartItems.ToList().ForEach(x => result.Items.Add(ObjectMapper.MapCart(x)));
+            cart.CartItems.ToList().ForEach(x => result.Items.Add(x.Map()));
 
             return result;
         }

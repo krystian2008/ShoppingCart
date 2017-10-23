@@ -172,11 +172,11 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\ShoppingBasketController.cs" />
+    <Compile Include="Controllers\ShoppingBasketApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\Parameters\ProductInfo.cs" />
+    <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Grids\MVCGridProductsConfig.cs" />
     <Compile Include="Models\MVCGridToolbarModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
