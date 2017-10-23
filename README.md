@@ -31,3 +31,7 @@ TODO:
 - Get, clear the content of existing shopping cart
 - Implement button <Add To Cart>
 - Authorization
+
+Info:
+File App_Data.zip includes files with database.
+Before start project please copy unzipped files to App_Data folder.
